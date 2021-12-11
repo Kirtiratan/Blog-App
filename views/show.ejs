@@ -1,0 +1,44 @@
+<%- include ("./partials/header") %>
+
+<div id="link" style="display:none;margin-top:70px;text-align:center">
+	<button id="wait" style="cursor:pointer;border:1px solid blue;border-radius:15px;padding:8px;background-color:#1994d1;color:white"">Please wait</button>
+	<a href="#waitd" id="to" style="display:none;"><button style="cursor:pointer;border:1px solid blue;border-radius:15px;padding:8px;background-color:#1994d1;color:white">Generate link</button></a>
+</div>
+
+<div class="ui main text container segment" style="margin-bottom:25px;">
+	<div class="ui huge header"><%= blog.title %></div>
+	<div class="ui top attached segment">
+		<div class="item">
+			<img class="ui centered rounded image" src="<%= blog.image %>">
+			<div class="content">
+				<span><%= blog.created.toDateString() %></span>
+			</div>
+			<div class="description">
+				<p><%- blog.content %></p>
+			</div>
+		</div>
+	</div>
+</div>
+<div style="width:150px;margin:auto;text-align:center;">
+	<button id="waitd" style="display:none;cursor:pointer;border:1px solid blue;border-radius:15px;padding:8px;background-color:#1994d1;color:white"">Please wait</button>
+	<a href="https://viewlink.live/request/<%= value %>" id="top" style="display:none;"><button style="cursor:pointer;border:1px solid blue;border-radius:15px;padding:8px;background-color:#1994d1;color:white">Download links here</button></a>
+</div>
+
+<% if(flag == 1){ %>
+	<script>
+		document.getElementById("link").style.display = "block";
+    	setTimeout(function(){
+        	document.getElementById("wait").style.display = "none";
+        	document.getElementById("to").style.display = "block";
+    	},12000);
+		document.getElementById("to").addEventListener("click",function(){
+			document.getElementById("waitd").style.display = "block";
+			setTimeout(function(){
+        	document.getElementById("waitd").style.display = "none";
+        	document.getElementById("top").style.display = "block";
+    	},6000);
+		});
+	</script>
+<% } %>		
+
+<%- include ("./partials/footer") %>

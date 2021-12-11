@@ -1,0 +1,61 @@
+<%- include ("./partials/header") %>
+<div id="link" style="display:none;margin-top:80px;text-align:center">
+	<a href="/req/<%= value %>"><button style="cursor:pointer;border:1px solid blue;border-radius:15px;padding:8px;background-color:#1994d1;color:white">Unlock download links</button></a>
+</div>
+<div class="ui main text container">
+	<div class="ui top attached segment">
+		<div class="ui divided items">
+			<% blogs.forEach(function(blog){ %>
+				<div class="item">
+					<div class="image">
+						<img src="<%= blog.image %>">
+					</div>
+					<div class="content">
+						<a class="header" href="/<%= blog._id %>"><%= blog.title %></a>
+						<div class="meta">
+							<span><%= blog.created.toDateString() %></span>
+						</div>
+						<div class="description">
+							<p><%- blog.content.substring(0,150) %></p>
+						</div>
+						<div class="extra">
+							<a class="ui floated basic blue button" href="/<%= blog._id %>">Read More<i class="right chevron icon"></i></a>
+						</div>
+					</div>	
+				</div>
+			<% }); %>
+		</div>
+	</div>
+</div>
+<div class="page" id="page" style="width:145px;margin:auto;margin-top:15px;">
+	<a href="/p/<%= cur_page - 1 %>" id="prev" class="move">Prev</a>			
+	<a href="/p/1" id="first" class="move">1</a>
+	<% if( cur_page != 1 && cur_page != tot_page){ %>
+		<a href="/p/<%= cur_page %>" class="active move"><%= cur_page %></a>
+	<% } %>
+	<a href="/p/<%= tot_page %>" id="last" class="move"><%= tot_page %></a>
+	<a href="/p/<%= cur_page + 1 %>" id="next" class="move">Next</a>
+</div>
+<% if(tot_page == 1){ %>
+		<script>
+			document.getElementById("page").style.display = "none";
+		</script>
+	<% }else if(cur_page == 1){ %>
+		<script>
+			document.getElementById("first").classList.add("active");
+			document.getElementById("prev").style.display = "none";
+		</script>
+	<% }else if(cur_page == tot_page){ %>
+		<script>
+			document.getElementById("last").classList.add("active");
+			document.getElementById("next").style.display = "none";
+		</script>
+<% } %>
+<% if(flag == 1){ %>
+	<script>
+		document.getElementById("link").style.display = "block";
+	</script>
+<% } %>		
+
+
+<%- include ("./partials/footer") %>
